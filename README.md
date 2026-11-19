@@ -2,7 +2,7 @@
 
 Replication materials for **Polarization on Social Media: Micro-Level Evidence and Macro-Level Implications**, JASSS 27(1), 7 (2024). [Published paper](https://www.jasss.org/27/1/7.html), [DOI](https://doi.org/10.18564/jasss.5298).
 
-This compact package starts from the project's cleaned, model-ready observations. It contains de-identified analysis data, the original statistical model functions, a portable analysis pipeline, selected historical ABM code, and a standalone ABM implementation. Original project files have not been changed. Participant anonymity is the aim; the public paper remains cited for attribution.
+This package is based on the project's original code. It contains de-identified analysis data, the original statistical model functions, a portable analysis pipeline, selected historical ABM code, and a standalone ABM implementation.
 
 ## Quick start
 
@@ -12,37 +12,18 @@ Open `master.R` in RStudio. Set the working directory to this folder, install th
 install.packages(c("ggplot2", "patchwork", "ggExtra"))
 ```
 
-For a complete batch run from this folder:
-
-```sh
-Rscript master.R
-```
-
-The master script displays plots in interactive sessions and saves PNG/PDF versions in `output/plots/`. It contains the plotting code directly, keeps named plot objects available for editing, and explains the data filters, parameters and figure mappings. It adds distributions of opinions, ideology and signed opinion change, pre/post comparisons, and follow-up descriptives. Missing simulation CSVs are generated using Python 3; set `run_missing_simulations <- FALSE` to run only the available plots. Existing simulation CSVs are reused.
+The master script displays plots in interactive sessions and saves PNG/PDF versions in `output/plots/`.
 
 The original posterior draws are in `data/posterior/`. They are analysis inputs required for the predictions and calibrated ABM, not validation artifacts. No validation reports or comparison files are distributed. The default workflow summarizes these draws rather than refitting. All generated files go in `output/` and can be deleted and recreated.
 
-The separate table/statistics entry point remains available:
-
-```sh
-Rscript code/analyze.R
-```
-
-This calculates descriptive/posterior summaries and WAIC. For LOO, install the R package `loo` first. The original `code/influence_functions.R` and `abm/plot.R` scripts remain available, but the master script does not depend on them.
+This calculates descriptive/posterior summaries and WAIC. For LOO, install the R package `loo` first.
 
 ## Install defSim for the notebook
 
-The first code cell of `abm/original_experiments.ipynb` installs defSim from [its GitHub repository](https://github.com/defSim/defSim) into the active notebook kernel:
+The first code cell of `abm/original_experiments.ipynb` installs [defSim](https://github.com/defSim/defSim) from [its GitHub repository](https://github.com/defSim/defSim) into the active notebook kernel:
 
 ```python
 %pip install "git+https://github.com/defSim/defSim.git" matplotlib seaborn
-```
-
-Alternatively, install it from a terminal into the Python environment used by Jupyter:
-
-```sh
-python3 -m pip install "git+https://github.com/defSim/defSim.git" matplotlib seaborn notebook
-python3 -m notebook abm/original_experiments.ipynb
 ```
 
 Git and internet access are needed. Restart the notebook kernel after installation if prompted. This follows the repository's GitHub installation method and installs its current version; it does not reconstruct the unrecorded historical defSim environment. The standalone `abm/run.py` used by the master R script does not require defSim.
